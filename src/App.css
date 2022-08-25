@@ -1,0 +1,26 @@
+* { 
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+}
+
+body { 
+    background-color: var(--color-bg);
+    font-family: var(--font-family);
+}
+
+a { 
+    text-decoration: none;
+    color:unset;
+}
+
+
+.section__padding { 
+    padding: 2rem 2rem;
+}
+
+.section__margin { 
+    margin: 2rem 2rem;
+}
+

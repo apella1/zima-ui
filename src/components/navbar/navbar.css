@@ -1,0 +1,41 @@
+.zima__navbar { 
+    background-color: var(--color-navbar);
+    display: flex;
+    justify-content: space-between;
+}
+
+.zima__navbar--logo { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zima__navbar--logo img { 
+    height: 67.59px;
+    width: 60px;
+}
+
+.zima__navbar--links { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.zima__navbar--links a { 
+    border: 2px solid var(--color-btn);
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    margin-right: 2rem;
+    color: var(--light-text);
+}
+
+.sign-up__button { 
+    background-color: var(--color-btn);
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    color: var(--light-text);
+
+}
+
