@@ -1,0 +1,43 @@
+.zima__footer { 
+    background-color: var(--color-footer);
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    padding: 1rem 4rem;
+}
+
+.zima__footer--links { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.zima__footer--links a { 
+    color: var(--light-text);
+}
+
+.zima__footer--separation { 
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+.zima__footer--social { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zima__footer--social a { 
+    color: var(--light-text);
+    margin-right: 1rem;
+}
+
+.zima__footer--copyright { 
+    color: var(--light-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

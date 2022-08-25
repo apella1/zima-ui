@@ -1,0 +1,14 @@
+.zima__conditions { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.zima__conditions a { 
+    color: var(--light-text);
+    padding: 0.7rem 1.5rem;
+    background-color: var(--color-btn);
+    border-radius: 5px;
+    margin: 0 3.5rem;
+}
