@@ -22,6 +22,11 @@
     
 }
 
+.zima__navbar--links:hover {
+    background: var(--color-btn);
+
+} 
+
 .zima__navbar--links a { 
     border: 2px solid var(--color-btn);
     border-radius: 5px;
