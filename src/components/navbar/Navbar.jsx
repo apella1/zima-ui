@@ -1,6 +1,6 @@
 import React from "react";
-import './navbar.css'
-import logo from '../../assets/Logo.png'
+import './navbar.css';
+import logo from '../../assets/Logo.png';
 
 const Menu = () => (
     <>
