@@ -29,6 +29,10 @@
     margin-right: 2rem;
     color: var(--light-text);
 }
+.zima__navbar--links a:hover {
+    background: var(--color-btn);
+
+} 
 
 .sign-up__button { 
     background-color: var(--color-btn);
