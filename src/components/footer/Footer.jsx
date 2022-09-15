@@ -1,4 +1,4 @@
-import React from "react";
+import { FaInstagram, FaTwitter, FaFacebook, FaWhatsapp } from 'react-icons/fa';
 import './footer.css'
 
 const Footer = () => { 
@@ -13,10 +13,10 @@ const Footer = () => {
             <div className="zima__footer--separation"></div>
 
             <div className="zima__footer--social">
-                <i><a href="instagram"></a></i>
-                <i><a href="facebook"></a></i>
-                <i><a href="twitter"></a></i>
-                <i><a href="whatsapp"></a></i>
+                <i><a href="instagram"><FaInstagram /></a></i>
+                <i><a href="facebook"><FaFacebook /></a></i>
+                <i><a href="twitter"><FaTwitter /></a></i>
+                <i><a href="whatsapp"><FaWhatsapp /></a></i>
             </div>
 
             <div className="zima__footer--copyright">copyright 2022</div>
