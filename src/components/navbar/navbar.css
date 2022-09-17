@@ -2,6 +2,7 @@
     background-color: var(--color-navbar);
     display: flex;
     justify-content: space-between;
+    height: 12vh;
 }
 
 .zima__navbar--logo { 
@@ -34,12 +35,15 @@
 
 } 
 
-.sign-up__button { 
+.sign-up__button {
+    font-weight: bold;
+    font-size: 1.2rem; 
     background-color: var(--color-btn);
     padding: 0.7rem 1.5rem;
     border: none;
     border-radius: 5px;
     color: var(--light-text);
+    cursor: pointer;
 
 }
 

@@ -8,7 +8,7 @@ const Menu = () => (
     <a href="conditions">Conditions</a>
     <a href="testimonials">Testimonials</a>
     <a href="blog">Afya Blog</a>
-    <a href="sign-in">Sign In</a>
+    <a href="sign-in">Log In</a>
     <button className="sign-up__button">Sign Up</button>
     </>
 )
