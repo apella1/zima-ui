@@ -1,11 +1,22 @@
 import './condition.css';
 import PropTypes from 'prop-types';
+import { FaArrowAltCircleDown } from 'react-icons/fa';
+import { useState } from 'react';
 
 const Condition = ( {title, text} ) => {
+  const [readMore, setReadMore] = useState(false);
+  const handleClick = () => { 
+    setReadMore(!readMore)
+  }
   return (
     <div className='condition'>
-        <h2>{title}</h2>
-        <p>{text}</p>
+        <h4>{title}</h4>
+        <p style={{color: 'white'}}>{text}</p>
+        <FaArrowAltCircleDown 
+          color='var(--color-btn)' 
+          style={{background: 'white', width: '10%', cursor: 'pointer'}}
+          onClick={handleClick}
+        />
     </div>
   )
 

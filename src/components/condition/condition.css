@@ -1,0 +1,35 @@
+.condition { 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0.5rem;
+    background: var(--color-btn);
+    border-radius: 5px;
+}
+
+.condition h4 { 
+    text-align: center;
+    color: white;
+    font-weight: 600;
+}
+
+.condition p { 
+    padding: 0.5rem;
+}
+
+/* Media Queries */
+
+/* Mobile phones */
+@media only screen and (max-width: 550px) { 
+    .condition { 
+        margin: 0.4rem;
+    }
+
+    .condition h4 { 
+        font-size: 16px;
+    }
+
+    .condition p { 
+        font-size: 14px;
+    }
+}

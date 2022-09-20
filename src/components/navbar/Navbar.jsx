@@ -29,7 +29,7 @@ const Navbar = () => {
                 </div>
 
                 <div onClick={handleClick} className='menu-icons'>
-                    {!nav ? <FaBars color='#1CF25A' size='1.5em' /> : <FaTimes color='#1CF25A' size='1.5em' />}
+                    {!nav ? <FaBars color='#1CF25A' size='2em' /> : <FaTimes color='#1CF25A' size='2em' />}
                 </div>
 
                 {/* Mobile Menu */}
