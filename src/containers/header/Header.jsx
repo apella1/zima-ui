@@ -1,5 +1,6 @@
 import React from "react";
 import './header.css'
+import Mental from '../../assets/Mental.png';
 
 const Header = () => { 
     return (
@@ -10,7 +11,7 @@ const Header = () => {
             <span>GET'S IN</span>
             <span className="call_to_Action"><a href="/">Start Chat</a></span>
             </div>
-            <img src={mental} alt="mental" className="zima__header-img" /
+            <img src={Mental} alt="mental" className="zima__header-img" />
         </div>
     )
 }
