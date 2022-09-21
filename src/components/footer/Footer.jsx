@@ -13,13 +13,13 @@ const Footer = () => {
             <div className="zima__footer--separation"></div>
 
             <div className="zima__footer--social">
-                <a href="instagram" className='instagram'><FaInstagram size='1.5em'/></a>
-                <a href="facebook" className='facebook'><FaFacebook size='1.5em'/></a>
-                <a href="twitter" className='twitter'><FaTwitter size='1.5em'/></a>
-                <a href="whatsapp" className='whatsapp'><FaWhatsapp size='1.5em'/></a>
+                <a href="instag" target='_blank' className='instagram'><FaInstagram size='1.5em'/></a>
+                <a href="facebook" target='_blank' className='facebook'><FaFacebook size='1.5em'/></a>
+                <a href="twitter" target='_blank' className='twitter'><FaTwitter size='1.5em'/></a>
+                <a href="whatsapp" target='_blank' className='whatsapp'><FaWhatsapp size='1.5em'/></a>
             </div>
 
-            <div className="zima__footer--copyright">&copy; copyright 2022</div>
+            <div className="zima__footer--copyright">&copy; 2022. All Rights Reserved</div>
         </div>
     )
 }
