@@ -1,9 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
 import './header.css';
-=======
-import './header.css';
->>>>>>> 2817b2dade4efebf44b453ee6874afd661386c03
 import Mental from '../../assets/Mental.png';
 
 const Header = () => {
