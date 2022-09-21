@@ -21,7 +21,7 @@
     height: 80vh;
     max-width: 60%;
 }
-.call_to_Action{
+.zima__header--action{
     /*align-self: flex-start;
     margin-left: 3rem !important;*/
     font-size: 1.3rem;
@@ -30,4 +30,102 @@
     padding: 0.8rem;
     border-radius: 12px;
     margin-top: 5rem !important;
+    animation-name: wiggle;
+    animation-iteration-count: infinite;
+}
+@keyframes wiggle{
+    0%{
+        transform: rotate(2deg);
+       }
+       20%{
+        transform: rotate(-5deg);
+       }
+       40%{
+        transform: rotate(5deg);
+       }
+       60%{
+        transform: rotate(-10deg);
+       }
+       80%{
+        transform: rotate(10deg);
+       }
+       100%{
+        transform: rotate(-2deg);
+       }
+}
+
+@-ms-keyframes wiggle{
+    0%{
+     transform: rotate(2deg);
+    }
+    20%{
+     transform: rotate(-5deg);
+    }
+    40%{
+     transform: rotate(5deg);
+    }
+    60%{
+     transform: rotate(-10deg);
+    }
+    80%{
+     transform: rotate(10deg);
+    }
+    100%{
+     transform: rotate(-2deg);
+    }
+}
+
+@media (max-width:550px) {
+    .zima__header{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .Zima__quote{
+        font-size: 1.2rem;
+        width: 100%;
+        height: 50vh;
+        color: var(--color-btn);
+    }
+    .zima__header-img{
+        display: none;
+        position:absolute;
+        top: 18%;
+        max-height: 30vh;
+        min-width: 100%;
+        align-self: center;
+        justify-self: center;
+        z-index: -1;
+        margin-left: -9.5%;
+    }
+    .zima__header--action{
+        color: var(--color-navbar);
+        font-size: 1rem;
+        padding: 0.4rem 0.6rem;
+        margin-top: 3rem !important;
+    }
+}
+
+@media (max-width:800px){
+    .Zima__quote{
+        font-size: 1.2rem;
+    }
+    .zima__header-img{
+        height: 40vh;
+        width: auto;
+    }
+    .zima__header--action{
+        color: var(--color-navbar);
+        font-size: 1rem;
+        margin-top: 3rem !important;
+    }
+}
+@media (max-width:1024px){
+    .Zima__quote{
+        font-size: 1.5rem;
+    }
+    .Zima__quote span{
+        margin: 1rem;
+    }
 }
