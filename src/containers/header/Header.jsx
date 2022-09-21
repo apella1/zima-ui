@@ -4,7 +4,13 @@ import './header.css'
 const Header = () => { 
     return (
         <div className="zima__header">
-            <h2>Header</h2>
+            <div className="Zima__quote">
+            <span>EVERYTHING HAS A CRACK</span>
+            <span>AND THAT'S HOW LIGHT</span>
+            <span>GET'S IN</span>
+            <span className="call_to_Action"><a href="/">Start Chat</a></span>
+            </div>
+            <img src={mental} alt="mental" className="zima__header-img" /
         </div>
     )
 }
