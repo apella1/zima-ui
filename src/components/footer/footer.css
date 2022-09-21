@@ -16,7 +16,7 @@
 
 .zima__footer--links a { 
     color: var(--light-text);
-    margin: 0.5rem 0;
+    margin: 0.5rem;
 }
 
 .zima__footer--links a:hover { 
@@ -38,7 +38,7 @@
 
 .zima__footer--social a { 
     color: var(--light-text);
-    margin-right: 3rem;
+    margin: 1rem 3rem;
 }
 
 .zima__footer--copyright { 
@@ -50,7 +50,7 @@
 
 /* Social links hover states */
 .instagram:hover {
-    color: pink;
+    color: magenta;
 }
 
 .facebook:hover { 
@@ -71,10 +71,17 @@
 
 @media only screen and (max-width: 550px) { 
     .zima__footer--social a { 
-        font-size: 18px;
+        font-size: 1em;
+        margin: 1rem;
     }
 
     .zima__footer--links a { 
         font-size: 14px;
     }
+
+    .zima__footer--copyright { 
+        font-size: 14px;
+    }
 }
+
+/* Medium devices - Tablets */

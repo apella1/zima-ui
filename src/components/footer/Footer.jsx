@@ -19,7 +19,7 @@ const Footer = () => {
                 <a href="whatsapp" className='whatsapp'><FaWhatsapp size='1.5em'/></a>
             </div>
 
-            <div className="zima__footer--copyright">&copy; copyright 2022</div>
+            <div className="zima__footer--copyright">&copy; 2022. All Rights Reserved</div>
         </div>
     )
 }
