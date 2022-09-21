@@ -9,7 +9,7 @@ const Header = () => {
             <span>EVERYTHING HAS A CRACK</span>
             <span>AND THAT'S HOW LIGHT</span>
             <span>GET'S IN</span>
-            <span className="call_to_Action"><a href="/">Start Chat</a></span>
+            <span className="zima__header--action"><a href="/">Start Chat</a></span>
             </div>
             <img src={Mental} alt="mental" className="zima__header-img" />
         </div>
