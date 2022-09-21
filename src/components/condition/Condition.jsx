@@ -19,7 +19,6 @@ const Condition = ( {title, text} ) => {
         />
     </div>
   )
-
 }
 
 Condition.propTypes = {

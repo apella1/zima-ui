@@ -1,6 +1,7 @@
 .conditions { 
     display: flex;
     flex-direction: column;
+    margin: 0.5rem;
 }
 
 .conditions h3 { 
@@ -22,7 +23,7 @@
 /* Mobile phones */
 
 @media only screen and (max-width: 550px) { 
-    .condtitions h2 { 
+    .conditions h2 { 
         font-weight:500;
     }
 }
