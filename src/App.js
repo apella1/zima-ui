@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 
-import {Chat, Feature, Footer, Navbar} from './components';
-import { Blog, Conditions, Header, Testimonials } from './containers';
+import {Footer, Navbar} from './components';
+import { Conditions, Header} from './containers';
 
 function App() {
   return (
@@ -10,7 +10,6 @@ function App() {
       <Navbar />
       <Header />
       <Conditions />
-      <Testimonials />
       <Footer />
     </div>
   );

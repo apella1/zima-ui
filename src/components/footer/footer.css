@@ -16,6 +16,11 @@
 
 .zima__footer--links a { 
     color: var(--light-text);
+    margin: 0.5rem 0;
+}
+
+.zima__footer--links a:hover { 
+    color: var(--color-btn);
 }
 
 .zima__footer--separation { 
@@ -28,11 +33,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 1rem 0;
 }
 
 .zima__footer--social a { 
     color: var(--light-text);
-    margin-right: 1rem;
+    margin-right: 3rem;
 }
 
 .zima__footer--copyright { 
@@ -40,4 +46,35 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Social links hover states */
+.instagram:hover {
+    color: pink;
+}
+
+.facebook:hover { 
+    color: blue;
+}
+
+.twitter:hover { 
+    color: blue;
+}
+
+.whatsapp:hover { 
+    color: mediumspringgreen;
+}
+
+/* Media Queries */
+
+/* Mobile phones */
+
+@media only screen and (max-width: 550px) { 
+    .zima__footer--social a { 
+        font-size: 18px;
+    }
+
+    .zima__footer--links a { 
+        font-size: 14px;
+    }
 }
