@@ -4,19 +4,22 @@ import { FaArrowAltCircleDown } from 'react-icons/fa';
 import { useState } from 'react';
 
 const Condition = ( {title, text} ) => {
-  const [readMore, setReadMore] = useState(false);
+  const [readMore, setReadMore] = useState('');
   const handleClick = () => { 
     setReadMore(!readMore)
   }
+
   return (
     <div className='condition'>
         <h4>{title}</h4>
         <p style={{color: 'white'}}>{text}</p>
-        <FaArrowAltCircleDown 
-          color='var(--color-btn)' 
-          style={{background: 'white', width: '10%', cursor: 'pointer'}}
-          onClick={handleClick}
-        />
+        <div className="condition__more">
+          <FaArrowAltCircleDown 
+            color='var(--color-btn)' 
+            style={{background: 'white', width: '10%', cursor: 'pointer'}}
+            onClick={handleClick}
+          />
+        </div>
     </div>
   )
 }

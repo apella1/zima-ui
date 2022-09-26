@@ -17,6 +17,13 @@
     padding: 0.5rem;
 }
 
+.condition__more { 
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    padding: 0.3rem;
+}
+
 /* Media Queries */
 
 /* Mobile phones */
