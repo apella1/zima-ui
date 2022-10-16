@@ -1,15 +1,16 @@
 import React from "react";
 import './navbar.css';
 import { useState } from "react";
-import { FaBars, FaTimes } from 'react-icons/fa'
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { Link } from "react-router-dom";
 
 const Menu = () => (
     <>
-    <a href="home">Home</a>
-    <a href="conditions">Conditions</a>
-    <a href="blog">Afya Blog</a>
-    <a href="sign-in">Log In</a>
-    <button className="sign-up__button">Sign Up</button>
+    <Link to="home">Home</Link>
+    <Link to="conditions">Conditions</Link>
+    <Link to="blog">Afya Blog</Link>
+    <Link to="login">Log In</Link>
+    <Link to='signup' className="sign-up__button">Sign Up</Link>
     </>
 )
 
@@ -40,3 +41,5 @@ const Navbar = () => {
 }
 
 export default Navbar
+
+// difference between react-scroll's Link and react-router-dom's Link

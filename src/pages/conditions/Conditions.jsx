@@ -4,7 +4,7 @@ import './conditions.css'
 
 const Conditions = () => { 
     return (
-        <div className="conditions">
+        <div className="conditions" name='conditions'>
             <h3>Common Conditions</h3>
             <div className="condition__types">
                 <Condition 

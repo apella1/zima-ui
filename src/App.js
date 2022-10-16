@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 import {Footer, Navbar} from './components';
-import { Conditions, Header} from './containers';
+import { Conditions, Header} from './pages';
 
 function App() {
   return (
@@ -16,3 +16,12 @@ function App() {
 }
 
 export default App;
+
+
+/**
+ * todo master grid layout 
+ * todo navigation within the app. react scroll vs react-router-dom
+ * todo sign up and login forms - form validation 
+ * todo blog section view - this is transferrable to other projects such as portfolio website 
+ * todo do a mockup of how the feature should be
+ */
