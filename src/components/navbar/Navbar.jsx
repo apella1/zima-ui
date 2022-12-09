@@ -3,13 +3,14 @@ import './navbar.css';
 import { useState } from "react";
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from "react-router-dom";
+import Login from "../login/Login";
 
 const Menu = () => (
     <>
     <Link to="home">Home</Link>
     <Link to="conditions">Conditions</Link>
     <Link to="blog">Afya Blog</Link>
-    <Link to="login">Log In</Link>
+	<Link to="login" path={<Login />}>Log In</Link>
     <Link to='signup' className="sign-up__button">Sign Up</Link>
     </>
 )

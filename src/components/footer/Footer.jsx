@@ -27,3 +27,5 @@ const Footer = () => {
 export default Footer
 
 // how to write media queries for react icons 
+// Rewrite a more professional footer with expansive details 
+

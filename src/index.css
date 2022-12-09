@@ -13,3 +13,9 @@
     --color-btn: #1CF25A;
     --light-text: #F9F4F5;
 }
+
+/* tailwindcss configuration */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
