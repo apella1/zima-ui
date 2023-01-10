@@ -28,8 +28,6 @@
 }
 
 .zima__navbar--links a { 
-    border: 2px solid var(--color-btn);
-    border-radius: 5px;
     padding: 0.5rem 1.5rem;
     margin-right: 2rem;
     color: var(--light-text);
