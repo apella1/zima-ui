@@ -1,8 +1,12 @@
 export default function Login() {
   return (
-    <div className="flex flex-col p-8">
-      <h2>Login</h2>
-      <form action="" method="post">
+    <div className="flex flex-col h-screen p-8 bg-blue-300">
+      <h2 className="self-center mb-8 text-4xl">Login</h2>
+      <form
+        action=""
+        method="post"
+        className="flex flex-col self-center w-3/6 space-y-4"
+      >
         <input
           type="text"
           placeholder="Email Address"
@@ -16,11 +20,13 @@ export default function Login() {
         <input
           type="submit"
           value="Login"
-          className="px-4 py-2 bg-black rounded-md"
+          className="px-4 py-2 text-white bg-black rounded-md"
         />
       </form>
-      <a href="forgot">Forgot password?</a>
-      <div>
+      <a href="forgot" className="self-center">
+        Forgot password?
+      </a>
+      <div className="flex self-center p-4 m-4 space-x-2">
         <p>Don't have an accont yet?</p>
         <a href="/signup" className="hover:underline">
           Sign Up
