@@ -1,9 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { Conditions, ErrorPage, Groups, Home, Login, Signup } from "./pages";
+import {
+  Conditions,
+  ErrorPage,
+  Groups,
+  Home,
+  Login,
+  Signup,
+  Therapist,
+} from "./pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Therapist from "./pages/therapist/Therapist";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home />, errorElement: <ErrorPage /> },

@@ -1,3 +1,5 @@
+export {};
+
 export default function Signup() {
   return (
     <div className="flex flex-col h-screen p-8 bg-blue-300 space-y-4">
@@ -31,6 +33,12 @@ export default function Signup() {
           Login
         </a>
       </div>
+      <a
+        href="/"
+        className="self-center px-4 py-2 text-white bg-black rounded-md"
+      >
+        Back Home
+      </a>
     </div>
   );
 }

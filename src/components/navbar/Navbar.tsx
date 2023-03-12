@@ -1,3 +1,5 @@
+export {};
+
 export default function Navbar() {
   const Menu = () => (
     <>
@@ -16,20 +18,21 @@ export default function Navbar() {
       <a href="/groups" className="hover:underline">
         Groups
       </a>
+      <a href="#faq" className="hover:underline">
+        FAQ
+      </a>
+
       <a href="/login" className="hover:underline">
         Login
       </a>
-      <a href="/login" className="hover:underline">
+      <a href="/signup" className="hover:underline">
         Sign Up
-      </a>
-      <a href="#faq" className="hover:underline">
-        FAQ
       </a>
     </>
   );
   return (
     <nav className="flex items-center justify-between p-4">
-      <p className="text-xl">zima</p>
+      <p className="text-3xl font-black">zima</p>
       <div className="flex items-center justify-center space-x-4">
         <Menu />
       </div>

@@ -1,3 +1,5 @@
+export {};
+
 export default function Header() {
   return (
     <header className="flex flex-col h-screen p-4 m-4" id="home">

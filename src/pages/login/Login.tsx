@@ -1,3 +1,5 @@
+export {};
+
 export default function Login() {
   return (
     <div className="flex flex-col h-screen p-8 bg-blue-300">
@@ -9,7 +11,7 @@ export default function Login() {
       >
         <input
           type="text"
-          placeholder="Email Address"
+          placeholder="Username"
           className="px-4 py-2 rounded-sm"
         />
         <input
@@ -32,6 +34,12 @@ export default function Login() {
           Sign Up
         </a>
       </div>
+      <a
+        href="/"
+        className="self-center px-4 py-2 text-white bg-black rounded-md"
+      >
+        Back Home
+      </a>
     </div>
   );
 }
