@@ -33,7 +33,7 @@ export default function Navbar() {
   return (
     <nav className="flex items-center justify-between p-4">
       <p className="text-3xl font-black">zima</p>
-      <div className="flex items-center justify-center space-x-4">
+      <div className="flex items-center justify-center space-x-4 sm:hidden">
         <Menu />
       </div>
     </nav>

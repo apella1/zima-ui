@@ -20,7 +20,7 @@ export default function ConditionPreview() {
   return (
     <section id="conditions" className="flex flex-col p-6">
       <h3 className="self-center text-4xl font-bold">Common Conditions</h3>
-      <div className="grid gap-4 grid-cols-3">
+      <div className="md:grid md:gap-4 md:grid-cols-3">
         {Conditions.map((item, id) => (
           <Condition condition={item} key={id} />
         ))}
