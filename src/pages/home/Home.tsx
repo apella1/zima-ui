@@ -11,7 +11,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="p-4 bg-blue-300">
+    <div className="min-h-screen p-4 bg-blue-300">
       <Navbar />
       <Header />
       <About />
