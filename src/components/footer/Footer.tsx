@@ -45,9 +45,12 @@ export default function Footer() {
             </button>
         </form>
       </div>
-      <div className="text-sm">
-        <a href="/terms" className="hover:underline">
+      <div className="text-sm flex flex-col items-center justify-center">
+        <a href="/terms" className="hover:underline mb-4">
           Terms and Conditions
+        </a>
+        <a href="/privacy-policy" className="hover:underline">
+          Privacy Policy
         </a>
       </div>
       <p className="text-sm">&copy; Zima 2023</p>
