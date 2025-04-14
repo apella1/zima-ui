@@ -1,7 +1,5 @@
-export {};
-
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,31 +9,47 @@ export default function Navbar() {
     document.body.classList.toggle("overflow-hidden");
   };
 
- 
-
   const Menu = () => (
     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
-      <Link to="/" className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0">
+      <Link
+        to="/"
+        className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0"
+      >
         Home
       </Link>
-      <Link to="/about" className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0">
+      <Link
+        to="/about"
+        className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0"
+      >
         About
       </Link>
-      <Link to="/conditions" className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0">
+      <Link
+        to="/conditions"
+        className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0"
+      >
         Conditions
       </Link>
-      <Link to="/faq" className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0">
+      <Link
+        to="/faq"
+        className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0"
+      >
         FAQ
       </Link>
-      <Link to="/login" className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0">
+      <Link
+        to="/login"
+        className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0"
+      >
         Login
       </Link>
-      <Link to="/signup" className="bg-blue-600 text-white font-bold text-lg hover:bg-blue-700 px-4 py-2 ml-4 rounded-lg">
+      <Link
+        to="/signup"
+        className="bg-blue-600 text-white font-bold text-lg hover:bg-blue-700 px-4 py-2 ml-4 rounded-lg"
+      >
         Sign Up
-      </Link> 
+      </Link>
     </div>
   );
-  
+
   return (
     <nav className="flex items-center justify-between p-4">
       <p className="text-3xl font-black">zima</p>

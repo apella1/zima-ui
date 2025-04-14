@@ -1,13 +1,9 @@
-export {};
-
-import {
-  ConditionPreview,
-  Footer,
-  Header,
-  Navbar,
-  FAQ,
-  About,
-} from "../../components";
+import About from "../../components/about/About";
+import ConditionPreview from "../../components/condition-preview/ConditionPreview";
+import FAQ from "../../components/faq/FAQ";
+import Footer from "../../components/footer/Footer";
+import Header from "../../components/header/Header";
+import Navbar from "../../components/navbar/Navbar";
 
 export default function Home() {
   return (
