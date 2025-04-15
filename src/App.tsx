@@ -4,15 +4,15 @@ import "./App.css";
 import RootLayout from "./layouts/root-layout";
 import Chat from "./pages/chat/chat";
 import Community from "./pages/community/community";
-import Conditions from "./pages/conditions/conditions";
+import ConditionsPage from "./pages/conditions/conditions-page";
 import ErrorPage from "./pages/error/error-page";
 import FAQPage from "./pages/faq/faq-page";
 import Home from "./pages/home/home";
 import Login from "./pages/login/login";
-import Signup from "./pages/signup/signup";
-import Therapist from "./pages/therapist/therapists";
-import TermsPage from "./pages/terms/terms-page";
 import PrivacyPolicyPage from "./pages/privacy/privacy-policy-page";
+import Signup from "./pages/signup/signup";
+import TermsPage from "./pages/terms/terms-page";
+import Therapist from "./pages/therapist/therapists";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home />, errorElement: <ErrorPage /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
-      { path: "/conditions", element: <Conditions /> },
+      { path: "/conditions", element: <ConditionsPage /> },
       { path: "/community", element: <Community /> },
       { path: "/therapists", element: <Therapist /> },
       { path: "/chat", element: <Chat /> },

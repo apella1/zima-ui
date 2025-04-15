@@ -2,6 +2,7 @@ import {
   categories,
   conditions,
 } from "@/components/condition-preview/conditions";
+import { PageTitle } from "@/components/page-title/page-title";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,9 +15,8 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Search } from "lucide-react";
 import { useState } from "react";
-import { PageTitle } from "@/components/page-title/page-title";
 
-export default function Conditions() {
+export default function ConditionsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
