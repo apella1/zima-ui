@@ -1,21 +1,45 @@
-export {};
+import { useAppSelector } from "@/app/hooks";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router";
 
 export default function Header() {
-  return (
-    <header className="relative flex flex-col p-4 h-4/5 pt-10 pb-6 md:mb-40 md:m-4 md:mt-20 md:mt-10 " id="home">
-  <div className="relative z-10 flex flex-col justify-start items-start h-full text-left text-white">
-    <h2 className="md:text-7xl text-4xl mb-4">Find support and guidance </h2>
-    <p className="md:text-3xl text-2xl mb-4">from a community of people who understand</p>
-    <p className="md:text-3xl text-2xl mb-8">through a simple chat</p>
-    <a href="/signup" className="py-4 px-8 bg-green-500 hover:bg-green-600 rounded-lg text-white text-xl font-bold">Chat Now</a>
-  </div>
-</header>
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
 
+  const handleChatNow = () => {
+    if (isAuthenticated) {
+      navigate("/chat");
+    } else {
+      navigate("/login", { state: { redirectTo: "/chat" } });
+    }
+  };
+
+  return (
+    <header className="relative flex flex-col p-8 min-h-[600px] bg-gradient-to-b from-primary/90 to-primary/50">
+      <div className="container mx-auto flex flex-col justify-center h-full max-w-3xl">
+        <div className="space-y-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+            Your Mental Health Journey Starts Here
+          </h1>
+          <p className="text-xl md:text-2xl text-white/90">
+            Connect with AI support, licensed professionals, and a caring
+            community. Get the help you need, when you need it, in complete
+            privacy.
+          </p>
+          <div className="space-y-4">
+            <Button
+              size="lg"
+              onClick={handleChatNow}
+              className="bg-white text-primary hover:bg-white/90"
+            >
+              Start Your Journey Now
+            </Button>
+            <p className="text-sm text-white/80">
+              Free, confidential, and available 24/7
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
   );
 }
-
-
-
-
-
-
