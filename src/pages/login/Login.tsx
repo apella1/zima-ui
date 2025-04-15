@@ -1,5 +1,9 @@
-import { login } from "@/app/features/auth/auth-slice";
-import { useAppDispatch } from "@/app/hooks";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Link, useLocation, useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import { Loader2 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,19 +22,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useLoginMutation } from "@/app/features/auth/auth-api";
 import { loginSchema, type LoginFormData } from "@/lib/validations/auth";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router";
-import { toast } from "react-toastify";
 
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useAppDispatch();
-  const [isLoading, setIsLoading] = useState(false);
+  const [login, { isLoading }] = useLoginMutation();
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -42,8 +40,7 @@ export default function Login() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      setIsLoading(true);
-      await dispatch(login(data)).unwrap();
+      await login(data).unwrap();
 
       toast.success("Login successful!");
 
@@ -51,9 +48,7 @@ export default function Login() {
       const redirectTo = location.state?.redirectTo || "/";
       navigate(redirectTo, { replace: true });
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Login failed");
-    } finally {
-      setIsLoading(false);
+      toast.error(error instanceof Error ? error.message : "Failed to login");
     }
   };
 
@@ -63,7 +58,7 @@ export default function Login() {
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl text-center">Welcome back</CardTitle>
           <CardDescription className="text-center">
-            Enter your email and password to sign in
+            Enter your credentials to sign in
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -111,14 +106,6 @@ export default function Login() {
               </Button>
             </form>
           </Form>
-          <div className="mt-4">
-            <Link
-              to="/forgot-password"
-              className="text-sm text-muted-foreground hover:text-primary"
-            >
-              Forgot your password?
-            </Link>
-          </div>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
           <div className="relative w-full">

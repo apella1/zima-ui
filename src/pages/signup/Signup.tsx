@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { Loader2 } from "lucide-react";
 
+import { useSignupMutation } from "@/app/features/auth/auth-api";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -23,14 +23,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useAppDispatch } from "@/app/hooks";
-import { signup } from "@/app/features/auth/auth-slice";
 import { signupSchema, type SignupFormData } from "@/lib/validations/auth";
 
 export default function Signup() {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const [isLoading, setIsLoading] = useState(false);
+  const [signup, { isLoading }] = useSignupMutation();
 
   const form = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
@@ -45,21 +42,18 @@ export default function Signup() {
 
   const onSubmit = async (data: SignupFormData) => {
     try {
-      setIsLoading(true);
-      await dispatch(
-        signup({
-          username: data.username,
-          email: data.email,
-          password: data.password,
-        })
-      ).unwrap();
+      await signup({
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      }).unwrap();
 
       toast.success("Account created successfully!");
       navigate("/");
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Signup failed");
-    } finally {
-      setIsLoading(false);
+      toast.error(
+        error instanceof Error ? error.message : "Failed to create account"
+      );
     }
   };
 

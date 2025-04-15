@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 interface User {
   id: string;
@@ -12,7 +12,7 @@ interface AuthState {
   isAuthenticated: boolean;
   user: User | null;
   token: string | null;
-  status: 'idle' | 'loading' | 'failed';
+  status: "idle" | "loading" | "failed";
   error: string | null;
 }
 
@@ -20,49 +20,12 @@ const initialState: AuthState = {
   isAuthenticated: false,
   user: null,
   token: null,
-  status: 'idle',
+  status: "idle",
   error: null,
 };
 
-export const login = createAsyncThunk(
-  'auth/login',
-  async ({ email, password }: { email: string; password: string }) => {
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Login failed');
-    }
-
-    const data = await response.json();
-    return data;
-  }
-);
-
-export const signup = createAsyncThunk(
-  'auth/signup',
-  async ({ username, email, password }: { username: string; email: string; password: string }) => {
-    const response = await fetch('/api/auth/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, email, password }),
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Signup failed');
-    }
-
-    const data = await response.json();
-    return data;
-  }
-);
-
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     logout: (state) => {
@@ -73,37 +36,6 @@ export const authSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(login.pending, (state) => {
-        state.status = 'loading';
-        state.error = null;
-      })
-      .addCase(login.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.isAuthenticated = true;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-      })
-      .addCase(login.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message || 'Login failed';
-      })
-      .addCase(signup.pending, (state) => {
-        state.status = 'loading';
-        state.error = null;
-      })
-      .addCase(signup.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.isAuthenticated = true;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-      })
-      .addCase(signup.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message || 'Signup failed';
-      });
   },
 });
 
