@@ -9,8 +9,8 @@ export const NAV_ITEMS: NavItem[] = [
     href: "/conditions",
   },
   {
-    label: "Groups",
-    href: "/groups",
+    label: "Community",
+    href: "/community",
   },
   {
     label: "Therapists",
