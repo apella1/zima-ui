@@ -16,6 +16,10 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Therapists",
     href: "/therapists",
   },
+  {
+    label: "FAQ",
+    href: "/faq",
+  },
 ];
 
 export const AUTH_ITEMS: NavItem[] = [

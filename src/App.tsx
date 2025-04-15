@@ -9,6 +9,7 @@ import Signup from "./pages/signup/signup";
 import Therapist from "./pages/therapist/therapists";
 import RootLayout from "./layouts/root-layout";
 import Chat from "./pages/chat/chat";
+import FAQPage from "./pages/faq/faq-page";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path: "/groups", element: <Groups /> },
       { path: "/therapists", element: <Therapist /> },
       { path: "/chat", element: <Chat /> },
+      { path: "/faq", element: <FAQPage /> },
     ],
   },
 ]);
