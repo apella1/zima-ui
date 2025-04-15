@@ -1,6 +1,6 @@
 export {};
 import { useState } from "react";
-import { Conditions } from "./Conditions";
+import { Conditions } from "./conditions";
 
 interface ICondition {
   title: string;

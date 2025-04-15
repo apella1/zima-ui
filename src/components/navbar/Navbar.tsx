@@ -1,89 +1,118 @@
-import { useState } from "react";
+"use client";
+
+import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
 import { Link } from "react-router";
 
+const NavLinks = () => (
+  <>
+    <NavigationMenuItem>
+      <NavigationMenuLink
+        className="text-foreground/80 hover:text-foreground"
+        asChild
+      >
+        <Link to="/">Home</Link>
+      </NavigationMenuLink>
+    </NavigationMenuItem>
+    <NavigationMenuItem>
+      <NavigationMenuLink
+        className="text-foreground/80 hover:text-foreground"
+        asChild
+      >
+        <Link to="/about">About</Link>
+      </NavigationMenuLink>
+    </NavigationMenuItem>
+    <NavigationMenuItem>
+      <NavigationMenuLink
+        className="text-foreground/80 hover:text-foreground"
+        asChild
+      >
+        <Link to="/conditions">Conditions</Link>
+      </NavigationMenuLink>
+    </NavigationMenuItem>
+    <NavigationMenuItem>
+      <NavigationMenuLink
+        className="text-foreground/80 hover:text-foreground"
+        asChild
+      >
+        <Link to="/faq">FAQ</Link>
+      </NavigationMenuLink>
+    </NavigationMenuItem>
+  </>
+);
+
+const AuthButtons = () => (
+  <div className="flex items-center gap-2">
+    <Button variant="ghost" asChild>
+      <Link to="/login">Login</Link>
+    </Button>
+    <Button asChild>
+      <Link to="/signup">Sign Up</Link>
+    </Button>
+  </div>
+);
+
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    document.body.classList.toggle("overflow-hidden");
-  };
-
-  const Menu = () => (
-    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
-      <Link
-        to="/"
-        className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0"
-      >
-        Home
-      </Link>
-      <Link
-        to="/about"
-        className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0"
-      >
-        About
-      </Link>
-      <Link
-        to="/conditions"
-        className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0"
-      >
-        Conditions
-      </Link>
-      <Link
-        to="/faq"
-        className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0"
-      >
-        FAQ
-      </Link>
-      <Link
-        to="/login"
-        className="text-gray-700 font-bold text-lg hover:underline px-3 py-2 sm:py-0"
-      >
-        Login
-      </Link>
-      <Link
-        to="/signup"
-        className="bg-blue-600 text-white font-bold text-lg hover:bg-blue-700 px-4 py-2 ml-4 rounded-lg"
-      >
-        Sign Up
-      </Link>
-    </div>
-  );
-
   return (
-    <nav className="flex items-center justify-between p-4">
-      <p className="text-3xl font-black">zima</p>
-      <div className="hidden sm:flex sm:items-center sm:space-x-4">
-        <Menu />
-      </div>
-      <button
-        type="button"
-        className="sm:hidden block text-2xl focus:outline-none"
-        onClick={toggleMenu}
-      >
-        &#9776;
-      </button>
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 z-50">
-          <div className="flex items-center justify-center h-full">
-            <div className="bg-white rounded-lg p-4 w-64">
-              <div className="flex justify-between items-center mb-4">
-                <p className="text-3xl font-black">zima</p>
-                <button
-                  type="button"
-                  className="text-2xl focus:outline-none"
-                  onClick={toggleMenu}
-                >
-                  &#xd7;
-                </button>
-              </div>
-              <div className="flex flex-col items-center justify-center h-full">
-                <Menu />
-              </div>
-            </div>
-          </div>
+    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-14 items-center">
+        <div className="mr-4 flex">
+          <Link to="/" className="mr-6 flex items-center space-x-2">
+            <span className="font-bold text-xl">zima</span>
+          </Link>
         </div>
-      )}
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex">
+          <NavigationMenu>
+            <NavigationMenuList className="gap-6">
+              <NavLinks />
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+
+        <div className="flex flex-1 items-center justify-end">
+          <div className="hidden md:flex">
+            <AuthButtons />
+          </div>
+
+          {/* Mobile Navigation */}
+          <Sheet>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon">
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[80vw] sm:w-[385px]">
+              <SheetHeader>
+                <SheetTitle>zima</SheetTitle>
+              </SheetHeader>
+              <div className="flex flex-col gap-4 py-4">
+                <div className="flex flex-col space-y-3">
+                  <NavLinks />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <AuthButtons />
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
     </nav>
   );
 }

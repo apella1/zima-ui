@@ -1,12 +1,12 @@
-import { Home } from "lucide-react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import "./App.css";
-import ErrorPage from "./pages/error/ErrorPage";
-import Groups from "./pages/groups/Groups";
-import Login from "./pages/login/Login";
-import Signup from "./pages/signup/Signup";
-import Therapist from "./pages/therapist/Therapist";
-import Conditions from "./pages/conditions/Conditions";
+import Conditions from "./pages/conditions/conditions";
+import ErrorPage from "./pages/error/error-page";
+import Groups from "./pages/groups/groups";
+import Home from "./pages/home/home";
+import Login from "./pages/login/login";
+import Signup from "./pages/signup/signup";
+import Therapist from "./pages/therapist/therapists";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home />, errorElement: <ErrorPage /> },
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <RouterProvider router={router} />
     </div>
   );
