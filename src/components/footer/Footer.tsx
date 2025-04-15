@@ -8,8 +8,35 @@ import {
   FOOTER_SECTIONS,
   SOCIAL_LINKS,
 } from "./footer.data";
+import { useScrollTop } from "@/hooks/use-scroll-top";
+
+const ScrollToTopLink = ({
+  to,
+  children,
+  className,
+}: {
+  to: string;
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  const handleClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  return (
+    <Link to={to} className={className} onClick={handleClick}>
+      {children}
+    </Link>
+  );
+};
 
 export default function Footer() {
+  // handle scroll to top on route change
+  useScrollTop();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // TODO: Implement form submission logic
@@ -71,12 +98,12 @@ export default function Footer() {
                   <ul className="space-y-2">
                     {section.links.map((link) => (
                       <li key={link.href}>
-                        <Link
+                        <ScrollToTopLink
                           to={link.href}
                           className="text-muted-foreground hover:text-foreground"
                         >
                           {link.label}
-                        </Link>
+                        </ScrollToTopLink>
                       </li>
                     ))}
                   </ul>
