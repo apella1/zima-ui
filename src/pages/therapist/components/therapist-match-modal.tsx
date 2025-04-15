@@ -22,31 +22,44 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
 
+const NO_PREFERENCE = "no_preference";
+
 const matchFormSchema = z.object({
   preferredGender: z.enum(["any", "male", "female", "non-binary"]),
-  sessionType: z.array(z.enum(["video", "phone", "in-person"])),
+  sessionType: z
+    .array(z.enum(["video", "phone", "in-person"]))
+    .min(1, "Please select at least one session type"),
   mainConcerns: z
     .array(z.string())
     .min(1, "Please select at least one concern"),
   priceRange: z.enum(["any", "0-5000", "5001-10000", "10001-15000", "15001+"]),
-  preferredApproach: z.array(z.string()),
-  languages: z.array(z.string()),
+  preferredApproach: z
+    .array(z.string())
+    .min(1, "Please select at least one approach"),
+  languages: z.array(z.string()).min(1, "Please select at least one language"),
 });
 
 export type MatchFormData = z.infer<typeof matchFormSchema>;
 
 const concerns = [
-  "Anxiety",
-  "Depression",
-  "Relationships",
-  "Trauma",
-  "Stress",
-  "Self-esteem",
-  "Career",
-  "Grief",
+  { value: NO_PREFERENCE, label: "Nothing specific" },
+  { value: "anxiety", label: "Anxiety" },
+  { value: "depression", label: "Depression" },
+  { value: "relationships", label: "Relationships" },
+  { value: "stress", label: "Stress" },
+  { value: "trauma", label: "Trauma" },
+  { value: "grief", label: "Grief" },
+  { value: "self-esteem", label: "Self-esteem" },
+  { value: "career", label: "Career" },
+  { value: "addiction", label: "Addiction" },
 ];
 
 const approaches = [
+  {
+    value: NO_PREFERENCE,
+    label: "No specific preference",
+    description: "Open to any therapeutic approach that might help",
+  },
   {
     value: "cbt",
     label: "Cognitive Behavioral Therapy (CBT)",
@@ -79,9 +92,16 @@ const approaches = [
   },
 ];
 
+const sessionTypes = [
+  { value: "video", label: "Video Call" },
+  { value: "phone", label: "Phone Call" },
+  { value: "in-person", label: "In-Person" },
+];
+
 const languages = [
-  "English",
-  "Swahili",
+  { value: NO_PREFERENCE, label: "Any language" },
+  { value: "English", label: "English" },
+  { value: "Swahili", label: "Swahili" },
 ];
 
 const priceRanges = [
@@ -111,19 +131,23 @@ export function TherapistMatchModal({
     defaultValues: {
       preferredGender: "any",
       sessionType: ["video"],
-      mainConcerns: [],
+      mainConcerns: [NO_PREFERENCE],
       priceRange: "any",
-      preferredApproach: [],
-      languages: ["English"],
+      preferredApproach: [NO_PREFERENCE],
+      languages: [NO_PREFERENCE],
     },
   });
 
   const onSubmit = async (data: MatchFormData) => {
     try {
+      if (data.languages.length === 0) {
+        toast.error("Please select at least one language");
+        return;
+      }
+
       onMatch(data);
       toast.success("Finding your perfect match!");
       onClose();
-      // Reset form and step after successful submission
       form.reset();
       setStep(1);
     } catch (error) {
@@ -134,17 +158,18 @@ export function TherapistMatchModal({
   const nextStep = () => {
     const currentFields = getCurrentStepFields(step);
 
-    // Validate current step fields before proceeding
     form.trigger(currentFields).then((isValid) => {
       if (isValid) {
         setStep((prev) => Math.min(prev + 1, totalSteps));
+      } else {
+        // Optional: Show error toast if validation fails
+        toast.error("Please fill in all required fields");
       }
     });
   };
 
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
-  // Helper function to get fields for current step
   const getCurrentStepFields = (
     currentStep: number
   ): Array<keyof MatchFormData> => {
@@ -166,7 +191,6 @@ export function TherapistMatchModal({
     }
   };
 
-  // Handle modal close
   const handleClose = () => {
     form.reset();
     setStep(1);
@@ -184,6 +208,7 @@ export function TherapistMatchModal({
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            {/* Step 1: Gender Preference */}
             {step === 1 && (
               <FormField
                 control={form.control}
@@ -225,32 +250,36 @@ export function TherapistMatchModal({
               />
             )}
 
+            {/* Step 2: Session Type */}
             {step === 2 && (
               <FormField
                 control={form.control}
                 name="sessionType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Preferred session type</FormLabel>
+                    <FormLabel>
+                      Preferred session type (select at least one)
+                    </FormLabel>
                     <FormControl>
                       <div className="space-y-2">
-                        {["video", "phone", "in-person"].map((type) => (
+                        {sessionTypes.map((type) => (
                           <FormItem
-                            key={type}
+                            key={type.value}
                             className="flex items-center space-x-3"
                           >
                             <Checkbox
-                              checked={field.value?.includes(type as any)}
+                              checked={field.value?.includes(type.value as any)}
                               onCheckedChange={(checked) => {
                                 const newValue = checked
-                                  ? [...(field.value || []), type]
-                                  : field.value?.filter((t) => t !== type) ||
-                                    [];
+                                  ? [...(field.value || []), type.value]
+                                  : field.value?.filter(
+                                      (t) => t !== type.value
+                                    ) || [];
                                 field.onChange(newValue);
                               }}
                             />
-                            <FormLabel className="font-normal capitalize">
-                              {type}
+                            <FormLabel className="font-normal">
+                              {type.label}
                             </FormLabel>
                           </FormItem>
                         ))}
@@ -262,32 +291,46 @@ export function TherapistMatchModal({
               />
             )}
 
+            {/* Step 3: Main Concerns */}
             {step === 3 && (
               <FormField
                 control={form.control}
                 name="mainConcerns"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>What brings you to therapy?</FormLabel>
+                    <FormLabel>
+                      What brings you to therapy? (select at least one)
+                    </FormLabel>
                     <FormControl>
                       <div className="grid grid-cols-2 gap-2">
                         {concerns.map((concern) => (
                           <FormItem
-                            key={concern}
+                            key={concern.value}
                             className="flex items-center space-x-3"
                           >
                             <Checkbox
-                              checked={field.value?.includes(concern)}
+                              checked={field.value?.includes(concern.value)}
                               onCheckedChange={(checked) => {
-                                const newValue = checked
-                                  ? [...(field.value || []), concern]
-                                  : field.value?.filter((c) => c !== concern) ||
-                                    [];
+                                let newValue: string[];
+                                if (concern.value === NO_PREFERENCE) {
+                                  newValue = checked ? [NO_PREFERENCE] : [];
+                                } else {
+                                  newValue = checked
+                                    ? [
+                                        ...field.value.filter(
+                                          (v) => v !== NO_PREFERENCE
+                                        ),
+                                        concern.value,
+                                      ]
+                                    : field.value.filter(
+                                        (v) => v !== concern.value
+                                      );
+                                }
                                 field.onChange(newValue);
                               }}
                             />
                             <FormLabel className="font-normal">
-                              {concern}
+                              {concern.label}
                             </FormLabel>
                           </FormItem>
                         ))}
@@ -299,6 +342,7 @@ export function TherapistMatchModal({
               />
             )}
 
+            {/* Step 4: Price Range */}
             {step === 4 && (
               <FormField
                 control={form.control}
@@ -331,6 +375,7 @@ export function TherapistMatchModal({
               />
             )}
 
+            {/* Step 5: Preferred Approach */}
             {step === 5 && (
               <FormField
                 control={form.control}
@@ -346,11 +391,21 @@ export function TherapistMatchModal({
                               <Checkbox
                                 checked={field.value.includes(approach.value)}
                                 onCheckedChange={(checked) => {
-                                  const newValue = checked
-                                    ? [...field.value, approach.value]
-                                    : field.value.filter(
-                                        (a) => a !== approach.value
-                                      );
+                                  let newValue: string[];
+                                  if (approach.value === NO_PREFERENCE) {
+                                    newValue = checked ? [NO_PREFERENCE] : [];
+                                  } else {
+                                    newValue = checked
+                                      ? [
+                                          ...field.value.filter(
+                                            (v) => v !== NO_PREFERENCE
+                                          ),
+                                          approach.value,
+                                        ]
+                                      : field.value.filter(
+                                          (v) => v !== approach.value
+                                        );
+                                  }
                                   field.onChange(newValue);
                                 }}
                               />
@@ -371,6 +426,7 @@ export function TherapistMatchModal({
               />
             )}
 
+            {/* Step 6: Languages */}
             {step === 6 && (
               <FormField
                 control={form.control}
@@ -379,23 +435,35 @@ export function TherapistMatchModal({
                   <FormItem>
                     <FormLabel>Preferred languages</FormLabel>
                     <FormControl>
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="space-y-2">
                         {languages.map((language) => (
                           <FormItem
-                            key={language}
+                            key={language.value}
                             className="flex items-center space-x-3"
                           >
                             <Checkbox
-                              checked={field.value.includes(language)}
+                              checked={field.value?.includes(language.value)}
                               onCheckedChange={(checked) => {
-                                const newValue = checked
-                                  ? [...field.value, language]
-                                  : field.value.filter((l) => l !== language);
+                                let newValue: string[];
+                                if (language.value === NO_PREFERENCE) {
+                                  newValue = checked ? [NO_PREFERENCE] : [];
+                                } else {
+                                  newValue = checked
+                                    ? [
+                                        ...field.value.filter(
+                                          (v) => v !== NO_PREFERENCE
+                                        ),
+                                        language.value,
+                                      ]
+                                    : field.value.filter(
+                                        (v) => v !== language.value
+                                      );
+                                }
                                 field.onChange(newValue);
                               }}
                             />
                             <FormLabel className="font-normal">
-                              {language}
+                              {language.label}
                             </FormLabel>
                           </FormItem>
                         ))}
@@ -407,6 +475,7 @@ export function TherapistMatchModal({
               />
             )}
 
+            {/* Navigation Buttons */}
             <div className="flex justify-between">
               <Button
                 type="button"
