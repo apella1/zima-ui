@@ -9,12 +9,44 @@ import {
 } from "@/components/ui/card";
 import { Lock, Users } from "lucide-react";
 import type { CommunityGroup } from "@/types/community";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 interface GroupCardProps {
   group: CommunityGroup;
 }
 
 export function GroupCard({ group }: GroupCardProps) {
+  const [isJoining, setIsJoining] = useState(false);
+
+  const handleJoinGroup = async () => {
+    setIsJoining(true);
+    try {
+      const response = await fetch(`/api/community/groups/${group.id}/join`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to join group");
+      }
+
+      toast.success(
+        group.isPrivate
+          ? "Join request sent to moderators"
+          : "Successfully joined group"
+      );
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to join group"
+      );
+    } finally {
+      setIsJoining(false);
+    }
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -42,7 +74,17 @@ export function GroupCard({ group }: GroupCardProps) {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">Join Group</Button>
+        <Button
+          className="w-full"
+          onClick={handleJoinGroup}
+          disabled={isJoining}
+        >
+          {isJoining
+            ? "Joining..."
+            : group.isPrivate
+            ? "Request to Join"
+            : "Join Group"}
+        </Button>
       </CardFooter>
     </Card>
   );
