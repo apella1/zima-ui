@@ -1,5 +1,3 @@
-export {};
-
 export default function Conditions() {
   return (
     <div>
