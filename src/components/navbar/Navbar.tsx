@@ -16,52 +16,34 @@ import {
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { Link } from "react-router";
+import { AUTH_ITEMS, NAV_ITEMS } from "./nav-config";
 
 const NavLinks = () => (
   <>
-    <NavigationMenuItem>
-      <NavigationMenuLink
-        className="text-foreground/80 hover:text-foreground"
-        asChild
-      >
-        <Link to="/">Home</Link>
-      </NavigationMenuLink>
-    </NavigationMenuItem>
-    <NavigationMenuItem>
-      <NavigationMenuLink
-        className="text-foreground/80 hover:text-foreground"
-        asChild
-      >
-        <Link to="/about">About</Link>
-      </NavigationMenuLink>
-    </NavigationMenuItem>
-    <NavigationMenuItem>
-      <NavigationMenuLink
-        className="text-foreground/80 hover:text-foreground"
-        asChild
-      >
-        <Link to="/conditions">Conditions</Link>
-      </NavigationMenuLink>
-    </NavigationMenuItem>
-    <NavigationMenuItem>
-      <NavigationMenuLink
-        className="text-foreground/80 hover:text-foreground"
-        asChild
-      >
-        <Link to="/faq">FAQ</Link>
-      </NavigationMenuLink>
-    </NavigationMenuItem>
+    {NAV_ITEMS.map((item) => (
+      <NavigationMenuItem key={item.href}>
+        <NavigationMenuLink
+          className="text-foreground/80 hover:text-foreground"
+          asChild
+        >
+          <Link to={item.href}>{item.label}</Link>
+        </NavigationMenuLink>
+      </NavigationMenuItem>
+    ))}
   </>
 );
 
 const AuthButtons = () => (
   <div className="flex items-center gap-2">
-    <Button variant="ghost" asChild>
-      <Link to="/login">Login</Link>
-    </Button>
-    <Button asChild>
-      <Link to="/signup">Sign Up</Link>
-    </Button>
+    {AUTH_ITEMS.map((item, index) => (
+      <Button
+        key={item.href}
+        variant={index === 0 ? "ghost" : "default"}
+        asChild
+      >
+        <Link to={item.href}>{item.label}</Link>
+      </Button>
+    ))}
   </div>
 );
 

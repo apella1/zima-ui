@@ -7,14 +7,20 @@ import Home from "./pages/home/home";
 import Login from "./pages/login/login";
 import Signup from "./pages/signup/signup";
 import Therapist from "./pages/therapist/therapists";
+import RootLayout from "./layouts/root-layout";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Home />, errorElement: <ErrorPage /> },
-  { path: "/login", element: <Login /> },
-  { path: "/signup", element: <Signup /> },
-  { path: "/conditions", element: <Conditions /> },
-  { path: "/groups", element: <Groups /> },
-  { path: "/therapist", element: <Therapist /> },
+  {
+    element: <RootLayout />,
+    children: [
+      { path: "/", element: <Home />, errorElement: <ErrorPage /> },
+      { path: "/login", element: <Login /> },
+      { path: "/signup", element: <Signup /> },
+      { path: "/conditions", element: <Conditions /> },
+      { path: "/groups", element: <Groups /> },
+      { path: "/therapists", element: <Therapist /> },
+    ],
+  },
 ]);
 
 function App() {
