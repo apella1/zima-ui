@@ -1,70 +1,80 @@
-export {};
 import { useState } from "react";
-import { Conditions } from "./conditions";
-
-interface ICondition {
-  title: string;
-  body: string;
-}
-
-interface IConditionCardProps {
-  condition: ICondition;
-  isExpanded: boolean;
-  setIsExpanded: (expanded: boolean) => void;
-}
-
-const ConditionCard = ({ condition, isExpanded, setIsExpanded }: IConditionCardProps) => {
-  const { title, body } = condition;
-
-  return (
-    <div className="w-full max-w-md rounded overflow-hidden shadow-lg mb-4">
-      <div
-        className="px-6 py-4 cursor-pointer flex items-center justify-between"
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        <div className="font-bold text-xl">{title}</div>
-        <div>
-          <svg
-            className={`transform transition-transform ${
-              isExpanded ? "rotate-180" : ""
-            } h-6 w-6`}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </div>
-      </div>
-      {isExpanded && (
-        <div className="px-6 py-4 text-gray-700">
-          <p className="text-base">{body}</p>
-        </div>
-      )}
-    </div>
-  );
-};
+import { conditions } from "./conditions";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChevronDown, ChevronRight } from "lucide-react";
+import { Link } from "react-router";
+import { cn } from "@/lib/utils";
 
 export default function ConditionPreview() {
-  const [expandedIndex, setExpandedIndex] = useState(-1);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  const previewConditions = conditions.slice(0, 6);
 
   return (
-    <section id="conditions" className="flex flex-col p-6">
-      <h3 className="self-center text-4xl font-bold">Common Conditions</h3>
-      <div className="md:grid md:gap-4 md:grid-cols-3">
-        {Conditions.map((item, id) => (
-          <ConditionCard
-            key={id}
-            condition={item}
-            isExpanded={id === expandedIndex}
-            setIsExpanded={(expanded) => setExpandedIndex(expanded ? id : -1)}
-          />
+    <section className="container py-12 space-y-8">
+      <div className="text-center space-y-4">
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+          Common Conditions
+        </h2>
+        <p className="mx-auto max-w-[700px] text-muted-foreground md:text-lg">
+          Learn about various mental health conditions, their symptoms, and
+          treatment options
+        </p>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {previewConditions.map((condition) => (
+          <Card key={condition.id} className="transition-all hover:shadow-lg">
+            <CardHeader className="space-y-1">
+              <div className="flex items-center gap-2">
+                <condition.icon className="w-5 h-5 text-primary" />
+                <CardTitle className="text-xl">{condition.title}</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                {condition.shortDescription}
+              </p>
+              <Button
+                variant="ghost"
+                className="group w-full justify-between"
+                onClick={() =>
+                  setExpandedId(
+                    expandedId === condition.id ? null : condition.id
+                  )
+                }
+              >
+                Learn more
+                {expandedId === condition.id ? (
+                  <ChevronDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
+                ) : (
+                  <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                )}
+              </Button>
+              <div
+                className={cn(
+                  "grid transition-all",
+                  expandedId === condition.id
+                    ? "grid-rows-[1fr] mt-4"
+                    : "grid-rows-[0fr]"
+                )}
+              >
+                <div className="overflow-hidden">
+                  <p className="text-sm text-muted-foreground">
+                    {condition.body}
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         ))}
+      </div>
+
+      <div className="text-center pt-4">
+        <Button asChild size="lg">
+          <Link to="/conditions">View All Conditions</Link>
+        </Button>
       </div>
     </section>
   );
