@@ -8,6 +8,7 @@ import Login from "./pages/login/login";
 import Signup from "./pages/signup/signup";
 import Therapist from "./pages/therapist/therapists";
 import RootLayout from "./layouts/root-layout";
+import Chat from "./pages/chat/chat";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: "/conditions", element: <Conditions /> },
       { path: "/groups", element: <Groups /> },
       { path: "/therapists", element: <Therapist /> },
+      { path: "/chat", element: <Chat /> },
     ],
   },
 ]);
