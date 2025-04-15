@@ -81,11 +81,7 @@ const approaches = [
 
 const languages = [
   "English",
-  "Spanish",
-  "Mandarin",
-  "French",
-  "Arabic",
-  "Hindi",
+  "Swahili",
 ];
 
 const priceRanges = [
@@ -127,16 +123,58 @@ export function TherapistMatchModal({
       onMatch(data);
       toast.success("Finding your perfect match!");
       onClose();
+      // Reset form and step after successful submission
+      form.reset();
+      setStep(1);
     } catch (error) {
       toast.error("Failed to process matching preferences");
     }
   };
 
-  const nextStep = () => setStep((prev) => Math.min(prev + 1, totalSteps));
+  const nextStep = () => {
+    const currentFields = getCurrentStepFields(step);
+
+    // Validate current step fields before proceeding
+    form.trigger(currentFields).then((isValid) => {
+      if (isValid) {
+        setStep((prev) => Math.min(prev + 1, totalSteps));
+      }
+    });
+  };
+
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
+  // Helper function to get fields for current step
+  const getCurrentStepFields = (
+    currentStep: number
+  ): Array<keyof MatchFormData> => {
+    switch (currentStep) {
+      case 1:
+        return ["preferredGender"];
+      case 2:
+        return ["sessionType"];
+      case 3:
+        return ["mainConcerns"];
+      case 4:
+        return ["priceRange"];
+      case 5:
+        return ["preferredApproach"];
+      case 6:
+        return ["languages"];
+      default:
+        return [];
+    }
+  };
+
+  // Handle modal close
+  const handleClose = () => {
+    form.reset();
+    setStep(1);
+    onClose();
+  };
+
   return (
-    <Dialog open={open} onOpenChange={onClose}>
+    <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>Find Your Perfect Match</DialogTitle>
@@ -202,11 +240,12 @@ export function TherapistMatchModal({
                             className="flex items-center space-x-3"
                           >
                             <Checkbox
-                              checked={field.value.includes(type as any)}
+                              checked={field.value?.includes(type as any)}
                               onCheckedChange={(checked) => {
                                 const newValue = checked
-                                  ? [...field.value, type]
-                                  : field.value.filter((t) => t !== type);
+                                  ? [...(field.value || []), type]
+                                  : field.value?.filter((t) => t !== type) ||
+                                    [];
                                 field.onChange(newValue);
                               }}
                             />
@@ -238,11 +277,12 @@ export function TherapistMatchModal({
                             className="flex items-center space-x-3"
                           >
                             <Checkbox
-                              checked={field.value.includes(concern)}
+                              checked={field.value?.includes(concern)}
                               onCheckedChange={(checked) => {
                                 const newValue = checked
-                                  ? [...field.value, concern]
-                                  : field.value.filter((c) => c !== concern);
+                                  ? [...(field.value || []), concern]
+                                  : field.value?.filter((c) => c !== concern) ||
+                                    [];
                                 field.onChange(newValue);
                               }}
                             />
