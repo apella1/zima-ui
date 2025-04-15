@@ -42,6 +42,25 @@ export const login = createAsyncThunk(
   }
 );
 
+export const signup = createAsyncThunk(
+  'auth/signup',
+  async ({ username, email, password }: { username: string; email: string; password: string }) => {
+    const response = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, email, password }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Signup failed');
+    }
+
+    const data = await response.json();
+    return data;
+  }
+);
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -70,6 +89,20 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Login failed';
+      })
+      .addCase(signup.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(signup.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.isAuthenticated = true;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+      })
+      .addCase(signup.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message || 'Signup failed';
       });
   },
 });

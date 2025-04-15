@@ -1,44 +1,207 @@
-export {};
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Link, useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import { Loader2 } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useAppDispatch } from "@/app/hooks";
+import { signup } from "@/app/features/auth/auth-slice";
+import { signupSchema, type SignupFormData } from "@/lib/validations/auth";
 
 export default function Signup() {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const form = useForm<SignupFormData>({
+    resolver: zodResolver(signupSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      confirmEmail: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onSubmit = async (data: SignupFormData) => {
+    try {
+      setIsLoading(true);
+      await dispatch(
+        signup({
+          username: data.username,
+          email: data.email,
+          password: data.password,
+        })
+      ).unwrap();
+
+      toast.success("Account created successfully!");
+      navigate("/");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Signup failed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className="flex flex-col h-screen p-8 bg-blue-300 space-y-4">
-      <h2 className="self-center text-4xl">Sign Up</h2>
-      <form
-        action=""
-        method="post"
-        className="flex flex-col self-center w-3/6 space-y-2"
-      >
-        <label htmlFor="username">Username:</label>
-        <input type="text" className="px-4 py-2 rounded-sm" id="username" />
-        <label htmlFor="email">Email Address:</label>
-        <input id="email" type="email" className="px-4 py-2 rounded-sm" />
-        <label htmlFor="username">Confirm Email:</label>
-        <input id="email" type="email" className="px-4 py-2 rounded-sm" />
-
-        <label htmlFor="pass1">Password:</label>
-        <input id="pass1" type="password" className="px-4 py-2 rounded-sm" />
-        <label htmlFor="pass2">Confirm Password:</label>
-        <input id="pass2" type="password" className="px-4 py-2 rounded-sm" />
-
-        <input
-          type="submit"
-          value="Sign Up"
-          className="px-4 py-2 text-white bg-black rounded-md"
-        />
-      </form>
-      <div className="flex self-center space-x-2">
-        <p>Already have an account?</p>
-        <a href="/login" className="hover:underline">
-          Login
-        </a>
-      </div>
-      <a
-        href="/"
-        className="self-center px-4 py-2 text-white bg-black rounded-md"
-      >
-        Back Home
-      </a>
+    <div className="container flex h-screen w-screen flex-col items-center justify-center">
+      <Card className="w-full max-w-[500px]">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl text-center">
+            Create an account
+          </CardTitle>
+          <CardDescription className="text-center">
+            Enter your information to create your account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your username"
+                        disabled={isLoading}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="name@example.com"
+                        type="email"
+                        disabled={isLoading}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirmEmail"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirm Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Confirm your email"
+                        type="email"
+                        disabled={isLoading}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Create a password"
+                        type="password"
+                        disabled={isLoading}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirm Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Confirm your password"
+                        type="password"
+                        disabled={isLoading}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                Create Account
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+        <CardFooter className="flex flex-col space-y-4">
+          <div className="relative w-full">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">
+                Or
+              </span>
+            </div>
+          </div>
+          <div className="text-center text-sm">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="font-medium text-primary hover:underline"
+            >
+              Sign in
+            </Link>
+          </div>
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => navigate("/")}
+          >
+            Back to Home
+          </Button>
+        </CardFooter>
+      </Card>
     </div>
   );
 }
