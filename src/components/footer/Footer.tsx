@@ -3,12 +3,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Link } from "react-router";
+import {
+  EMERGENCY_CONTACT,
+  FOOTER_SECTIONS,
+  SOCIAL_LINKS,
+} from "./footer.data";
 
 export default function Footer() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // TODO: Implement form submission logic
   };
+
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="border-t bg-background">
@@ -58,68 +65,37 @@ export default function Footer() {
           {/* Links & Info Section */}
           <div className="space-y-8">
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="space-y-3">
-                <h3 className="text-lg font-semibold">Quick Links</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <Link
-                      to="/about"
-                      className="text-muted-foreground hover:text-foreground"
-                    >
-                      About Us
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/conditions"
-                      className="text-muted-foreground hover:text-foreground"
-                    >
-                      Mental Health Conditions
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/therapists"
-                      className="text-muted-foreground hover:text-foreground"
-                    >
-                      Find a Therapist
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="space-y-3">
-                <h3 className="text-lg font-semibold">Legal</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <Link
-                      to="/terms"
-                      className="text-muted-foreground hover:text-foreground"
-                    >
-                      Terms and Conditions
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/privacy-policy"
-                      className="text-muted-foreground hover:text-foreground"
-                    >
-                      Privacy Policy
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+              {FOOTER_SECTIONS.map((section) => (
+                <div key={section.title} className="space-y-3">
+                  <h3 className="text-lg font-semibold">{section.title}</h3>
+                  <ul className="space-y-2">
+                    {section.links.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          to={link.href}
+                          className="text-muted-foreground hover:text-foreground"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
 
             <div className="space-y-3">
-              <h3 className="text-lg font-semibold">Emergency Contact</h3>
+              <h3 className="text-lg font-semibold">
+                {EMERGENCY_CONTACT.title}
+              </h3>
               <p className="text-muted-foreground">
-                If you're in crisis, please call our 24/7 helpline:
+                {EMERGENCY_CONTACT.description}
                 <br />
                 <a
-                  href="tel:1-800-273-8255"
+                  href={`tel:${EMERGENCY_CONTACT.phone}`}
                   className="font-semibold text-foreground"
                 >
-                  1-800-273-8255
+                  {EMERGENCY_CONTACT.phone}
                 </a>
               </p>
             </div>
@@ -129,27 +105,20 @@ export default function Footer() {
         <div className="mt-8 border-t pt-8">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Zima. All rights reserved.
+              © {currentYear} Zima. All rights reserved.
             </p>
             <div className="flex space-x-4">
-              <a
-                href="https://twitter.com/zima"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Twitter
-              </a>
-              <a
-                href="https://facebook.com/zima"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Facebook
-              </a>
-              <a
-                href="https://instagram.com/zima"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Instagram
-              </a>
+              {SOCIAL_LINKS.map((social) => (
+                <a
+                  key={social.href}
+                  href={social.href}
+                  className="text-muted-foreground hover:text-foreground"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {social.label}
+                </a>
+              ))}
             </div>
           </div>
         </div>

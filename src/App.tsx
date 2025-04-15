@@ -10,6 +10,8 @@ import Home from "./pages/home/home";
 import Login from "./pages/login/login";
 import Signup from "./pages/signup/signup";
 import Therapist from "./pages/therapist/therapists";
+import TermsPage from "./pages/terms/terms-page";
+import PrivacyPolicyPage from "./pages/privacy/privacy-policy-page";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,8 @@ const router = createBrowserRouter([
       { path: "/therapists", element: <Therapist /> },
       { path: "/chat", element: <Chat /> },
       { path: "/faq", element: <FAQPage /> },
+      { path: "/terms", element: <TermsPage /> },
+      { path: "/privacy-policy", element: <PrivacyPolicyPage /> },
     ],
   },
 ]);
