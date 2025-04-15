@@ -1,7 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Link } from "react-router";
 import {
   EMERGENCY_CONTACT,
@@ -9,6 +5,7 @@ import {
   SOCIAL_LINKS,
 } from "./footer.data";
 import { useScrollTop } from "@/hooks/use-scroll-top";
+import { ContactForm } from "./contact-form";
 
 const ScrollToTopLink = ({
   to,
@@ -34,60 +31,14 @@ const ScrollToTopLink = ({
 };
 
 export default function Footer() {
-  // handle scroll to top on route change
   useScrollTop();
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // TODO: Implement form submission logic
-  };
-
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="border-t bg-background">
       <div className="container px-4 py-8 md:py-12">
         <div className="grid gap-8 md:grid-cols-2">
-          {/* Contact Form Section */}
-          <div className="space-y-6">
-            <h2 className="text-2xl font-semibold tracking-tight">
-              Contact Us
-            </h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Type your message here"
-                  required
-                  className="min-h-[120px]"
-                />
-              </div>
-              <Button type="submit" className="w-full md:w-auto">
-                Send Message
-              </Button>
-            </form>
-          </div>
+          <ContactForm />
 
           {/* Links & Info Section */}
           <div className="space-y-8">
