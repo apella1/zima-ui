@@ -5,6 +5,7 @@ import { useAppSelector } from "@/app/hooks";
 import { useNavigate } from "react-router";
 import { SafeSpace } from "./components/safe-space";
 import { LiveSessions } from "./components/live-sessions";
+import { ArchivedSessions } from "./components/archived-sessions";
 
 export default function Community() {
   const navigate = useNavigate();
@@ -30,10 +31,11 @@ export default function Community() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-3 lg:w-[400px]">
+        <TabsList className="grid w-full grid-cols-4 lg:w-[500px]">
           <TabsTrigger value="groups">Support Groups</TabsTrigger>
           <TabsTrigger value="safe-space">Safe Space</TabsTrigger>
           <TabsTrigger value="live">Live Sessions</TabsTrigger>
+          <TabsTrigger value="archived">Past Sessions</TabsTrigger>
         </TabsList>
 
         <TabsContent value="groups" className="space-y-4">
@@ -46,6 +48,10 @@ export default function Community() {
 
         <TabsContent value="live" className="space-y-4">
           <LiveSessions />
+        </TabsContent>
+
+        <TabsContent value="archived" className="space-y-4">
+          <ArchivedSessions />
         </TabsContent>
       </Tabs>
     </div>

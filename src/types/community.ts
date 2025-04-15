@@ -48,4 +48,13 @@ export interface GroupSession {
   maxParticipants: number;
   currentParticipants: number;
   type: 'professional' | 'peer-led';
+  status: 'upcoming' | 'live' | 'ended';
+  recordingUrl?: string;
+  resources?: {
+    title: string;
+    url: string;
+    type: 'pdf' | 'video' | 'link';
+  }[];
+  participants?: string[]; // array of user IDs
+  rsvpList?: string[]; // array of user IDs
 }
