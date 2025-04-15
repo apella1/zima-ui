@@ -33,7 +33,7 @@ const matchFormSchema = z.object({
   languages: z.array(z.string()),
 });
 
-type MatchFormData = z.infer<typeof matchFormSchema>;
+export type MatchFormData = z.infer<typeof matchFormSchema>;
 
 const concerns = [
   "Anxiety",
@@ -47,30 +47,35 @@ const concerns = [
 ];
 
 const approaches = [
-  { 
-    value: "cbt", 
+  {
+    value: "cbt",
     label: "Cognitive Behavioral Therapy (CBT)",
-    description: "A practical approach that helps you identify and change negative thought patterns and behaviors. Effective for anxiety, depression, and stress management."
+    description:
+      "A practical approach that helps you identify and change negative thought patterns and behaviors. Effective for anxiety, depression, and stress management.",
   },
-  { 
-    value: "psychodynamic", 
+  {
+    value: "psychodynamic",
     label: "Psychodynamic",
-    description: "Explores how past experiences and unconscious processes influence current behavior. Helpful for deep-seated emotional issues and relationship patterns."
+    description:
+      "Explores how past experiences and unconscious processes influence current behavior. Helpful for deep-seated emotional issues and relationship patterns.",
   },
-  { 
-    value: "humanistic", 
+  {
+    value: "humanistic",
     label: "Humanistic",
-    description: "Focuses on personal growth and self-actualization. Emphasizes your capacity to make rational choices and develop to your maximum potential."
+    description:
+      "Focuses on personal growth and self-actualization. Emphasizes your capacity to make rational choices and develop to your maximum potential.",
   },
-  { 
-    value: "mindfulness", 
+  {
+    value: "mindfulness",
     label: "Mindfulness-based",
-    description: "Combines meditation and behavioral techniques to help reduce stress and anxiety. Teaches present-moment awareness and emotional regulation."
+    description:
+      "Combines meditation and behavioral techniques to help reduce stress and anxiety. Teaches present-moment awareness and emotional regulation.",
   },
-  { 
-    value: "emdr", 
+  {
+    value: "emdr",
     label: "EMDR",
-    description: "Eye Movement Desensitization and Reprocessing helps process traumatic memories. Particularly effective for PTSD and trauma-related issues."
+    description:
+      "Eye Movement Desensitization and Reprocessing helps process traumatic memories. Particularly effective for PTSD and trauma-related issues.",
   },
 ];
 
@@ -88,17 +93,19 @@ const priceRanges = [
   { value: "0-5000", label: "KES 0 - 5,000" },
   { value: "5001-10000", label: "KES 5,001 - 10,000" },
   { value: "10001-15000", label: "KES 10,001 - 15,000" },
-  { value: "15001+", label: "KES 15,001+" }
+  { value: "15001+", label: "KES 15,001+" },
 ];
 
 interface TherapistMatchModalProps {
   open: boolean;
   onClose: () => void;
+  onMatch: (data: MatchFormData) => void;
 }
 
 export function TherapistMatchModal({
   open,
   onClose,
+  onMatch,
 }: TherapistMatchModalProps) {
   const [step, setStep] = useState(1);
   const totalSteps = 6;
@@ -117,8 +124,7 @@ export function TherapistMatchModal({
 
   const onSubmit = async (data: MatchFormData) => {
     try {
-      // TODO: Implement matching logic
-      console.log("Match data:", data);
+      onMatch(data);
       toast.success("Finding your perfect match!");
       onClose();
     } catch (error) {
@@ -302,7 +308,9 @@ export function TherapistMatchModal({
                                 onCheckedChange={(checked) => {
                                   const newValue = checked
                                     ? [...field.value, approach.value]
-                                    : field.value.filter((a) => a !== approach.value);
+                                    : field.value.filter(
+                                        (a) => a !== approach.value
+                                      );
                                   field.onChange(newValue);
                                 }}
                               />

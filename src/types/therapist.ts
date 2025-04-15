@@ -1,6 +1,7 @@
 export interface Therapist {
   id: string;
   name: string;
+  gender?: "male" | "female" | "non-binary";
   avatar: string;
   licenseType: string;
   yearsOfExperience: number;

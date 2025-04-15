@@ -5,6 +5,7 @@ export const mockTherapists: Therapist[] = [
     id: "t1",
     name: "Dr. Sarah Mwangi",
     avatar: "/avatars/sarah-mwangi.jpg",
+    gender: "female",
     licenseType: "Clinical Psychologist",
     yearsOfExperience: 12,
     languages: ["English", "Swahili"],
@@ -44,6 +45,7 @@ export const mockTherapists: Therapist[] = [
   {
     id: "t2",
     name: "John Kamau",
+    gender: "male",
     avatar: "/avatars/john-kamau.jpg",
     licenseType: "Licensed Professional Counselor",
     yearsOfExperience: 8,
@@ -82,6 +84,7 @@ export const mockTherapists: Therapist[] = [
   {
     id: "t3",
     name: "Dr. Amina Omar",
+    gender: "female",
     avatar: "/avatars/amina-omar.jpg",
     licenseType: "Psychiatrist",
     yearsOfExperience: 15,
@@ -120,6 +123,7 @@ export const mockTherapists: Therapist[] = [
     id: "t4",
     name: "David Ochieng",
     avatar: "/avatars/david-ochieng.jpg",
+    gender: "male",
     licenseType: "Marriage and Family Therapist",
     yearsOfExperience: 10,
     languages: ["English", "Swahili", "Luo"],
@@ -161,6 +165,7 @@ export const mockTherapists: Therapist[] = [
   {
     id: "t5",
     name: "Grace Njeri",
+    gender: "female",
     avatar: "/avatars/grace-njeri.jpg",
     licenseType: "Clinical Social Worker",
     yearsOfExperience: 6,
@@ -198,6 +203,7 @@ export const mockTherapists: Therapist[] = [
   {
     id: "t6",
     name: "Dr. James Kiprop",
+    gender: "male",
     avatar: "/avatars/james-kiprop.jpg",
     licenseType: "Clinical Psychologist",
     yearsOfExperience: 14,
@@ -239,6 +245,7 @@ export const mockTherapists: Therapist[] = [
   {
     id: "t7",
     name: "Fatima Hassan",
+    gender: "female",
     avatar: "/avatars/fatima-hassan.jpg",
     licenseType: "Counseling Psychologist",
     yearsOfExperience: 7,
@@ -281,6 +288,7 @@ export const mockTherapists: Therapist[] = [
   {
     id: "t8",
     name: "Peter Mutua",
+    gender: "male",
     avatar: "/avatars/peter-mutua.jpg",
     licenseType: "Addiction Counselor",
     yearsOfExperience: 9,
@@ -318,6 +326,7 @@ export const mockTherapists: Therapist[] = [
   {
     id: "t9",
     name: "Lucy Wambui",
+    gender: "female",
     avatar: "/avatars/lucy-wambui.jpg",
     licenseType: "Child and Adolescent Therapist",
     yearsOfExperience: 11,
@@ -360,6 +369,7 @@ export const mockTherapists: Therapist[] = [
   {
     id: "t10",
     name: "Dr. Benjamin Kimani",
+    gender: "male",
     avatar: "/avatars/benjamin-kimani.jpg",
     licenseType: "Neuropsychologist",
     yearsOfExperience: 16,
@@ -402,6 +412,7 @@ export const mockTherapists: Therapist[] = [
   {
     id: "t11",
     name: "Elizabeth Akinyi",
+    gender: "female",
     avatar: "/avatars/elizabeth-akinyi.jpg",
     licenseType: "Trauma Specialist",
     yearsOfExperience: 13,
@@ -439,6 +450,7 @@ export const mockTherapists: Therapist[] = [
   {
     id: "t12",
     name: "Mohammed Ali",
+    gender: "non-binary",
     avatar: "/avatars/mohammed-ali.jpg",
     licenseType: "Group Therapist",
     yearsOfExperience: 8,

@@ -15,6 +15,7 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import { TherapistCard } from "./components/therapist-card";
 import { TherapistMatchModal } from "./components/therapist-match-modal";
+import { MatchFormData } from "./components/therapist-match-modal";
 
 export default function Therapists() {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ export default function Therapists() {
   const [selectedLanguage, setSelectedLanguage] = useState<string>("all");
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 15000]);
   const [selectedMode, setSelectedMode] = useState<string>("all");
+  const [matchData, setMatchData] = useState<MatchFormData | null>(null);
 
   const therapists = mockTherapists;
 
@@ -49,6 +51,21 @@ export default function Therapists() {
     () => Array.from(new Set(therapists.flatMap((t) => t.specialties))),
     [therapists]
   );
+
+  const getPriceRangeValues = (range: string): [number, number] => {
+    switch (range) {
+      case "0-5000":
+        return [0, 5000];
+      case "5001-10000":
+        return [5001, 10000];
+      case "10001-15000":
+        return [10001, 15000];
+      case "15001+":
+        return [15001, Infinity];
+      default:
+        return [0, Infinity];
+    }
+  };
 
   const filteredTherapists = useMemo(() => {
     return therapists.filter((therapist) => {
@@ -82,13 +99,53 @@ export default function Therapists() {
           selectedMode as "in-person" | "video" | "phone"
         );
 
-      return (
+      const baseFilters =
         matchesSearch &&
         matchesSpecialty &&
         matchesLocation &&
         matchesLanguage &&
         matchesPrice &&
-        matchesMode
+        matchesMode;
+
+      if (!matchData) return baseFilters;
+
+      const matchesGender =
+        matchData.preferredGender === "any" ||
+        therapist.gender === matchData.preferredGender;
+
+      const matchesSessionType = matchData.sessionType.some((type) =>
+        therapist.sessionInfo.modes.includes(
+          type as "in-person" | "video" | "phone"
+        )
+      );
+
+      const matchesConcerns = matchData.mainConcerns.some((concern) =>
+        therapist.specialties.includes(concern)
+      );
+
+      const [minPrice, maxPrice] = getPriceRangeValues(matchData.priceRange);
+      const matchesPriceRange =
+        therapist.sessionInfo.cost >= minPrice &&
+        therapist.sessionInfo.cost <= maxPrice;
+
+      const matchesApproach =
+        matchData.preferredApproach.length === 0 ||
+        matchData.preferredApproach.some((approach) =>
+          therapist.approaches.some((a) => a.name === approach)
+        );
+
+      const matchesMatchLanguages = matchData.languages.every((lang) =>
+        therapist.languages.includes(lang)
+      );
+
+      return (
+        baseFilters &&
+        matchesGender &&
+        matchesSessionType &&
+        matchesConcerns &&
+        matchesPriceRange &&
+        matchesApproach &&
+        matchesMatchLanguages
       );
     });
   }, [
@@ -99,7 +156,19 @@ export default function Therapists() {
     selectedLanguage,
     priceRange,
     selectedMode,
+    matchData, // Add matchData to dependencies
   ]);
+
+  const handleMatch = (data: MatchFormData) => {
+    setMatchData(data);
+    // Reset other filters when match is applied
+    setSearchQuery("");
+    setSelectedSpecialty(null);
+    setSelectedLocation("all");
+    setSelectedLanguage("all");
+    setPriceRange([0, 15000]);
+    setSelectedMode("all");
+  };
 
   return (
     <div className="container py-12 space-y-8">
@@ -260,9 +329,23 @@ export default function Therapists() {
         </div>
       </div>
 
+      {matchData && (
+        <div className="mb-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setMatchData(null)}
+            className="mb-4"
+          >
+            Clear Match Filters
+          </Button>
+        </div>
+      )}
+
       <TherapistMatchModal
         open={showMatchModal}
         onClose={() => setShowMatchModal(false)}
+        onMatch={handleMatch}
       />
     </div>
   );
