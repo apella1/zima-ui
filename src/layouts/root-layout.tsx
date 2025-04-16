@@ -1,4 +1,4 @@
-import Footer from "@/components/footer/footer";
+import Footer from "@/components/footer/footer.tsx";
 import Navbar from "@/components/navbar/navbar.tsx";
 import { Outlet } from "react-router";
 
