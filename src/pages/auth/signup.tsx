@@ -52,7 +52,7 @@ export default function Signup() {
       navigate("/");
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : "Failed to create account"
+        error instanceof Error ? error.message : "Failed to create account",
       );
     }
   };
