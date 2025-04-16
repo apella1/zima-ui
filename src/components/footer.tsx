@@ -5,7 +5,7 @@ import {
   EMERGENCY_CONTACT,
   FOOTER_SECTIONS,
   SOCIAL_LINKS
-} from "./footer/footer.data";
+} from "./footer/footerData";
 
 const ScrollToTopLink = ({
   to,
