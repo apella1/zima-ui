@@ -5,18 +5,18 @@ import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
-  NavigationMenuList,
+  NavigationMenuList
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
+  SheetTrigger
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { Link } from "react-router";
-import { AUTH_ITEMS, NAV_ITEMS } from "./nav-config";
+import { AUTH_ITEMS, NAV_ITEMS } from "./navbar/nav-config";
 
 const NavLinks = () => (
   <>
@@ -49,11 +49,11 @@ const AuthButtons = () => (
 
 export default function Navbar() {
   return (
-    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="bg-background/95 supports-[backdrop-filter]:bg-background/60 border-b backdrop-blur">
       <div className="container flex h-14 items-center">
         <div className="mr-4 flex">
           <Link to="/" className="mr-6 flex items-center space-x-2">
-            <span className="font-bold text-xl">zima</span>
+            <span className="text-xl font-bold">zima</span>
           </Link>
         </div>
 
