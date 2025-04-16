@@ -1,5 +1,5 @@
 import { LucideIcon } from "lucide-react";
-import { aboutContent } from "./about.data";
+import { aboutContent } from "./aboutData";
 
 interface FeatureCardProps {
   icon: LucideIcon;
@@ -8,9 +8,9 @@ interface FeatureCardProps {
 }
 
 const FeatureCard = ({ icon: Icon, title, description }: FeatureCardProps) => (
-  <div className="flex flex-col items-center p-6 space-y-4 text-center rounded-lg bg-card">
-    <div className="p-3 rounded-full bg-primary/10">
-      <Icon className="w-6 h-6 text-primary" />
+  <div className="bg-card flex flex-col items-center space-y-4 rounded-lg p-6 text-center">
+    <div className="bg-primary/10 rounded-full p-3">
+      <Icon className="text-primary h-6 w-6" />
     </div>
     <h4 className="text-xl font-semibold">{title}</h4>
     <p className="text-muted-foreground">{description}</p>
@@ -21,12 +21,12 @@ export default function About() {
   const { hero, features, mission, approach } = aboutContent;
 
   return (
-    <section className="py-16 space-y-12">
-      <div className="container text-center space-y-6">
+    <section className="space-y-12 py-16">
+      <div className="container space-y-6 text-center">
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
           {hero.title}
         </h2>
-        <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
+        <p className="text-muted-foreground mx-auto max-w-[700px] md:text-xl">
           {hero.description}
         </p>
       </div>

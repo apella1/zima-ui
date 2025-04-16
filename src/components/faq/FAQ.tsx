@@ -2,26 +2,26 @@ import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
+  AccordionTrigger
 } from "@/components/ui/accordion";
 import { Link } from "react-router";
-import { homepageFaqs } from "./faq.data";
+import { homepageFaqs } from "./faqData";
 
 export default function FAQ() {
   return (
-    <section id="faq" className="py-16 bg-muted/50">
+    <section id="faq" className="bg-muted/50 py-16">
       <div className="container space-y-8">
-        <div className="text-center space-y-4">
+        <div className="space-y-4 text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
             Frequently Asked Questions
           </h2>
-          <p className="mx-auto max-w-[700px] text-muted-foreground">
+          <p className="text-muted-foreground mx-auto max-w-[700px]">
             Find quick answers to common questions about Zima and mental health
             support.
           </p>
         </div>
 
-        <div className="max-w-[800px] mx-auto">
+        <div className="mx-auto max-w-[800px]">
           <Accordion type="single" collapsible className="w-full">
             {homepageFaqs.map((faq, index) => (
               <AccordionItem key={index} value={`faq-${index}`}>
@@ -36,7 +36,7 @@ export default function FAQ() {
           </Accordion>
         </div>
 
-        <div className="text-center pt-6">
+        <div className="pt-6 text-center">
           <Link
             to="/faq"
             className="text-primary hover:text-primary/90 font-medium"

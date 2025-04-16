@@ -1,10 +1,10 @@
+import { faqData } from "@/components/faq/faqData";
 import { PageTitle } from "@/components/page-title/page-title";
-import { faqData } from "@/components/faq/faq.data";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
+  AccordionTrigger
 } from "@/components/ui/accordion";
 
 export default function FAQPage() {
@@ -14,12 +14,12 @@ export default function FAQPage() {
         title="Frequently Asked Questions"
         description="Find answers to common questions about Zima's mental health resources and services."
       />
-      <div className="container py-12 space-y-8">
+      <div className="container space-y-8 py-12">
         <div className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tighter md:text-5xl">
             Frequently Asked Questions
           </h1>
-          <p className="max-w-[700px] text-muted-foreground md:text-lg">
+          <p className="text-muted-foreground max-w-[700px] md:text-lg">
             Find answers to common questions about Zima's mental health
             resources, community support, and professional services.
           </p>
