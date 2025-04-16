@@ -1,16 +1,16 @@
 import { Link } from "react-router";
+import { useScrollTop } from "@/hooks/use-scroll-top";
+import { ContactForm } from "./footer/contact-form";
 import {
   EMERGENCY_CONTACT,
   FOOTER_SECTIONS,
-  SOCIAL_LINKS,
-} from "./footer.data";
-import { useScrollTop } from "@/hooks/use-scroll-top";
-import { ContactForm } from "./contact-form";
+  SOCIAL_LINKS
+} from "./footer/footer.data";
 
 const ScrollToTopLink = ({
   to,
   children,
-  className,
+  className
 }: {
   to: string;
   children: React.ReactNode;
@@ -19,7 +19,7 @@ const ScrollToTopLink = ({
   const handleClick = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: "smooth"
     });
   };
 
@@ -35,7 +35,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t bg-background">
+    <footer className="bg-background border-t">
       <div className="container px-4 py-8 md:py-12">
         <div className="grid gap-8 md:grid-cols-2">
           <ContactForm />
@@ -71,7 +71,7 @@ export default function Footer() {
                 <br />
                 <a
                   href={`tel:${EMERGENCY_CONTACT.phone}`}
-                  className="font-semibold text-foreground"
+                  className="text-foreground font-semibold"
                 >
                   {EMERGENCY_CONTACT.phone}
                 </a>
@@ -82,7 +82,7 @@ export default function Footer() {
 
         <div className="mt-8 border-t pt-8">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               © {currentYear} Zima. All rights reserved.
             </p>
             <div className="flex space-x-4">

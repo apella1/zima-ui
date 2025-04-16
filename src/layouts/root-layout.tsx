@@ -1,4 +1,4 @@
-import Footer from "@/components/footer/footer.tsx";
+import Footer from "@/components/footer";
 import Navbar from "@/components/navbar/navbar.tsx";
 import { Outlet } from "react-router";
 
@@ -8,9 +8,9 @@ interface RootLayoutProps {
 
 export default function RootLayout({ className = "" }: RootLayoutProps) {
   return (
-    <div className="min-h-screen flex flex-col bg-background px-8 lg:px-16 xl:px-32">
+    <div className="bg-background flex min-h-screen flex-col px-8 lg:px-16 xl:px-32">
       <Navbar />
-      <main className={`flex-1 container ${className}`}>
+      <main className={`container flex-1 ${className}`}>
         <Outlet />
       </main>
       <Footer />
