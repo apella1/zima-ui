@@ -1,5 +1,5 @@
 import Footer from "@/components/footer/footer";
-import Navbar from "@/components/navbar/navbar";
+import Navbar from "@/components/navbar/navbar.tsx";
 import { Outlet } from "react-router";
 
 interface RootLayoutProps {
