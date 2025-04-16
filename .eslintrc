@@ -1,0 +1,46 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+    },
+  },
+  "settings": {
+    "react": {
+      "version": "detect",
+    },
+    "import/resolver": {
+      "typescript": {},
+    },
+  },
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true,
+  },
+  "plugins": ["react", "@typescript-eslint", "import"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+  ],
+  "rules": {
+    "import/no-unresolved": "error",
+    "import/named": "error",
+    "import/default": "error",
+    "import/no-named-as-default": "error",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+      },
+    ],
+  },
+}
